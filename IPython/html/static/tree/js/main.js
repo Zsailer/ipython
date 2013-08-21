@@ -17,7 +17,11 @@ $(document).ready(function () {
     $('#new_notebook').button().click(function (e) {
         IPython.notebook_list.new_notebook($('body').data('baseProjectUrl'))
     });
-
+    $('#new_folder').button().click(function (e) {
+        IPython.content_list.create_folder($('body').data('baseProjectUrl'))
+    });
+    IPython.session_list = new IPython.SessionList('#session_list');
+    IPython.content_list = new IPython.ContentList('#content_list');
     IPython.notebook_list = new IPython.NotebookList('#notebook_list');
     IPython.cluster_list = new IPython.ClusterList('#cluster_list');
     IPython.login_widget = new IPython.LoginWidget('#login_widget');
@@ -31,6 +35,8 @@ $(document).ready(function () {
         //refresh immediately , then start interval
         if($('.upload_button').length == 0)
         {
+            IPython.session_list.load_list();
+            IPython.content_list.load_list();
             IPython.notebook_list.load_sessions();
             IPython.cluster_list.load_list();
         }
@@ -38,6 +44,8 @@ $(document).ready(function () {
             interval_id = setInterval(function(){
                     if($('.upload_button').length == 0)
                     {
+                        IPython.session_list.load_list();
+                        IPython.content_list.load_list();
                         IPython.notebook_list.load_sessions();
                         IPython.cluster_list.load_list();
                     }

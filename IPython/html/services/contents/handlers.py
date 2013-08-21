@@ -34,7 +34,7 @@ class ContentRootHandler(IPythonHandler):
     @web.authenticated
     def get(self):
         cm = self.content_manager
-        contents = cm.list_contents("")
+        contents = cm.list_contents("/")
         self.finish(jsonapi.dumps(contents))
 
     def post(self):
@@ -90,7 +90,7 @@ _content_path_regex = r"(?P<content_path>.+)"
 
 default_handlers = [
     (r"api/contents/%s" % _content_path_regex, ContentHandler),
-    (r"api/contents",  ContentRootHandler),
+    (r"api/contents/",  ContentRootHandler),
     (r"api/", ServicesRedirectHandler),
     (r"api", ServicesHandler)
     

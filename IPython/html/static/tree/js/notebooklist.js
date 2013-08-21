@@ -187,12 +187,15 @@ var IPython = (function (IPython) {
         ).append(
             $('<div/>').addClass("item_buttons btn-group pull-right")
         ));
-        
+        this.element.append(item);
+        /*
         if (index === -1) {
             this.element.append(item);
         } else {
             this.element.children().eq(index).after(item);
+        
         }
+        */
         return item;
     };
 
